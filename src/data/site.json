@@ -1,0 +1,23 @@
+{
+  "profile": {
+    "name": "David Cheeseman",
+    "avatar": { "src": "/media/avatar.gif", "alt": "A cat wearing headphones, eyes closed, singing along" }
+  },
+  "meta": {
+    "title": "David Cheeseman",
+    "description": "Links to David Cheeseman on LinkedIn and GitHub."
+  },
+  "theme": {
+    "light": { "bg": "#f7f5f2", "fg": "#1c1b1a", "accent": "#2f6fdf", "card": "#ffffff" },
+    "dark":  { "bg": "#121212", "fg": "#ecebe9", "accent": "#7aa7ff", "card": "#1e1e1e" }
+  },
+  "background": { "enabled": false, "effect": "none" },
+  "sections": [
+    {
+      "items": [
+        { "type": "link", "label": "LinkedIn", "url": "https://www.linkedin.com/in/dcheeseman/" },
+        { "type": "link", "label": "GitHub", "url": "https://github.com/nuvious" }
+      ]
+    }
+  ]
+}

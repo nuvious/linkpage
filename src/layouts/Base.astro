@@ -1,0 +1,37 @@
+---
+import "../styles/global.css";
+import { withBase } from "../lib";
+
+interface Props {
+  meta: { title: string; description: string; ogImage?: string };
+  theme: Record<"light" | "dark", Record<string, string>>;
+}
+
+const { meta, theme } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = meta.ogImage ? new URL(withBase(meta.ogImage), Astro.site).href : undefined;
+const tokens = (set: Record<string, string>) =>
+  Object.entries(set).map(([k, v]) => `--${k}: ${v};`).join(" ");
+const themeCss = `:root { ${tokens(theme.light)} } @media (prefers-color-scheme: dark) { :root { ${tokens(theme.dark)} } }`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/gif" href={withBase("/favicon.gif")} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
+    <style set:html={themeCss}></style>
+  </head>
+  <body>
+    <main><slot /></main>
+  </body>
+</html>

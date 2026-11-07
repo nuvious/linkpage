@@ -1,0 +1,15 @@
+---
+import { withBase } from "../lib";
+
+interface Props {
+  label: string;
+  url: string;
+  icon?: string;
+}
+
+const { label, url, icon } = Astro.props;
+---
+<a class="card link" href={url} rel="me noopener">
+  {icon && <img src={withBase(icon)} alt="" width="24" height="24" />}
+  <span>{label}</span>
+</a>

@@ -1,0 +1,23 @@
+---
+import { getEntry } from "astro:content";
+import Base from "../layouts/Base.astro";
+import Profile from "../components/Profile.astro";
+import LinkItem from "../components/LinkItem.astro";
+
+const entry = await getEntry("site", "site");
+if (!entry) throw new Error("src/data/site.json did not load");
+const site = entry.data;
+---
+<Base meta={site.meta} theme={site.theme}>
+  <Profile {...site.profile} />
+  {site.sections.map((section) => (
+    <section>
+      {section.heading && <h2>{section.heading}</h2>}
+      <ul>
+        {section.items.map((item) => (
+          <li><LinkItem label={item.label} url={item.url} icon={item.icon} /></li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Base>

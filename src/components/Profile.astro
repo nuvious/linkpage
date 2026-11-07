@@ -1,0 +1,16 @@
+---
+import { withBase } from "../lib";
+
+interface Props {
+  name: string;
+  bio?: string;
+  avatar: { src: string; alt: string };
+}
+
+const { name, bio, avatar } = Astro.props;
+---
+<header class="profile">
+  <img class="avatar" src={withBase(avatar.src)} alt={avatar.alt} width="128" height="128" />
+  <h1>{name}</h1>
+  {bio && <p>{bio}</p>}
+</header>
